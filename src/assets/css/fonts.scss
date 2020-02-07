@@ -1,0 +1,33 @@
+$polly-font-dir: "../fonts/polly/";
+// $icon-dir: "~static/icons/";
+
+
+/*===============================================================================================*/
+/*		                                  FONT - McLaren							         		              	 */
+/*===============================================================================================*/
+
+@font-face {
+  font-family: "Polly";
+  src: url($polly-font-dir+"Polly-Regular.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*===============================================================================================*/
+/*		ICONFONTS																											 */
+/*===============================================================================================*/
+
+/* Default icons, arrows and such */
+
+// @font-face {
+//   font-family: "icons";
+//   src: url($icon-dir+"font_name.eot");
+//   src: url($icon-dir+"font_name.eot?#iefix")
+//       format("embedded-opentype"),
+//     url($icon-dir+"font_name.woff") format("woff"),
+//     url($icon-dir+"font_name.ttf") format("truetype"),
+//     url($icon-dir+"font_name.svg#font_name")
+//       format("svg");
+//   font-weight: normal;
+//   font-style: normal;
+// }

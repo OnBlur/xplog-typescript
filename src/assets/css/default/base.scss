@@ -1,0 +1,44 @@
+body {
+  font-family: "Polly";
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+
+    .row {
+      // display: flex;
+      // flex-wrap: wrap;
+      // justify-content: center;
+      // align-items: center;
+
+      .register-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .form-group {
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 30px;
+        }
+      }
+
+      .form-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 700px) {
+
+  .row,
+  .navbar,
+  .navigation {
+    display: flex;
+    flex-direction: column;
+  }
+}
