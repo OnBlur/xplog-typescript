@@ -1,4 +1,4 @@
-import { EntryState, ENTRIES, EntryActionTypes } from "./types";
+import { EntryState, EntryObject, ENTRIES, EntryActionTypes } from "./types";
 
 import API from "../api";
 
@@ -18,7 +18,7 @@ export function fetchEntriesError(errorMessage: EntryState): EntryActionTypes {
   };
 }
 
-export function addEntry(data: EntryState): EntryActionTypes {
+export function addEntry(data: EntryObject): EntryActionTypes {
   return {
     type: ENTRIES.ADD,
     payload: data

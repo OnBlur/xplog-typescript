@@ -15,7 +15,6 @@ interface IProps {
 // export const Dashboard: React.FunctionComponent<RouteComponentProps<IRouteParams>> = props => {
 export const Dashboard: React.FunctionComponent<RouteComponentProps> = props => {
   const entries = useTypedSelector(state => state.entries.entries);
-  console.log(entries.entries);
   // props.match.params.id
 
   const toEntry = () => {

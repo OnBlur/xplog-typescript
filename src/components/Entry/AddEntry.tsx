@@ -13,10 +13,14 @@ export const AddEntry: React.FunctionComponent<RouteComponentProps> = props => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [date, setDate] = useState("22-Jan-2020");
+  const [userId, setUserId] = useState(13);
 
-  const addHandler = () => {
-    console.log(id, "ad");
-    // dispatch(addEntry({ id, title, body, date }));
+  const addHandler = (event: { preventDefault: () => void }) => {
+    event.preventDefault();
+
+    const entryObject = { id, title, body, date, userId };
+    dispatch(addEntry(entryObject));
+
     props.history.push(routes.Home);
   };
 

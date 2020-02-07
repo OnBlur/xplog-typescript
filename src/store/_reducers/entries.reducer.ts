@@ -1,4 +1,9 @@
-import { EntryState, EntryActionTypes, ENTRIES } from "../entries/types";
+import {
+  EntryState,
+  EntryActionTypes,
+  ENTRIES,
+  EntryObject
+} from "../entries/types";
 
 const initialState: EntryState = {
   entries: [
@@ -49,7 +54,7 @@ export function entryReducer(
     case ENTRIES.ADD: {
       return {
         ...state,
-        ...action.payload
+        entries: state.entries.concat(action.payload as EntryObject)
       };
     }
     // case ENTRIES.EDIT: {

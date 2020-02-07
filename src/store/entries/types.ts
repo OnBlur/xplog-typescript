@@ -1,4 +1,4 @@
-interface EntryObject {
+export interface EntryObject {
   id: number;
   title: string;
   body: string;
@@ -7,7 +7,7 @@ interface EntryObject {
 }
 
 export interface EntryState {
-  entries: Array<EntryObject>;
+  entries: EntryObject[];
 }
 
 export const ENTRIES = {
@@ -31,7 +31,7 @@ interface FetchErrorAction {
 
 interface AddAction {
   type: typeof ENTRIES.ADD;
-  payload: EntryState;
+  payload: EntryObject;
 }
 
 interface EditAction {
