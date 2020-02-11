@@ -1,13 +1,21 @@
 import { EntryState, EntryObject, ENTRIES, EntryActionTypes } from "./types";
+import { store } from "../../_helpers";
 
 import API from "../api";
 
-export function fetchEntriesSuccess(
-  successMessage: EntryState
-): EntryActionTypes {
+export const fetchEntries = async () => {
+  try {
+    const response = await API.get(`posts`);
+    return store.dispatch(fetchEntriesSuccess(response.data));
+  } catch (error) {
+    return store.dispatch(fetchEntriesError(error));
+  }
+};
+
+export function fetchEntriesSuccess(data: EntryState): EntryActionTypes {
   return {
     type: ENTRIES.FETCH_SUCCESS,
-    payload: successMessage
+    payload: data
   };
 }
 
@@ -25,17 +33,17 @@ export function addEntry(data: EntryObject): EntryActionTypes {
   };
 }
 
-export function editEntry(data: EntryState): EntryActionTypes {
+export function editEntry(data: EntryObject): EntryActionTypes {
   return {
     type: ENTRIES.EDIT,
     payload: data
   };
 }
 
-export function removeEntry(id: EntryState): EntryActionTypes {
+export function removeEntry(data: EntryObject): EntryActionTypes {
   return {
     type: ENTRIES.REMOVE,
-    payload: id
+    payload: data
   };
 }
 
@@ -45,16 +53,3 @@ export function getEntryById(id: EntryState): EntryActionTypes {
     payload: id
   };
 }
-
-//Fetching entries
-// export const fetchEntries = () => dispatch => {
-//   return API.get(`posts`, { mode: "cors" })
-//     .then(response => {
-//       if (response.status !== 200) {
-//         throw new Error("Unsuccessful request to deckofcardsapi.com");
-//       }
-//       return response.data;
-//     })
-//     .then(data => dispatch(fetchEntriesSuccess(data)))
-//     .catch(error => dispatch(fetchEntriesError(error)));
-// };

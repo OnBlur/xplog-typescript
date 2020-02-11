@@ -8,7 +8,7 @@ import {
 const initialState: EntryState = {
   entries: [
     {
-      id: 1,
+      id: 14302,
       title: "Why do we use it?",
       body:
         "It is a long established fact that a reader will be distracted by the readable content.",
@@ -16,7 +16,7 @@ const initialState: EntryState = {
       userId: 213
     },
     {
-      id: 2,
+      id: 22342,
       title: "Why do we use it?",
       body:
         "It is a long established fact that a reader will be distracted by the readable content.",
@@ -24,7 +24,7 @@ const initialState: EntryState = {
       userId: 213
     },
     {
-      id: 3,
+      id: 32323,
       title: "Why do we use it?",
       body:
         "It is a long established fact that a reader will be distracted by the readable content.",
@@ -42,7 +42,7 @@ export function entryReducer(
     case ENTRIES.FETCH_SUCCESS: {
       return {
         ...state,
-        ...action.payload
+        entries: state.entries.concat(action.payload as EntryObject)
       };
     }
     case ENTRIES.FETCH_ERROR: {
@@ -57,23 +57,26 @@ export function entryReducer(
         entries: state.entries.concat(action.payload as EntryObject)
       };
     }
-    // case ENTRIES.EDIT: {
-    //   // Edit user in state
-    //   const updatedItems = state.entries.map(entry => {
-    //     if (entry.id === action.data.id) {
-    //       return { ...entry, ...action.data };
-    //     }
-    //     return entry;
-    //   });
-    //   return { ...state, entries: updatedItems };
-    // }
-    // case ENTRIES.REMOVE: {
-    //   // Remove user from state
-    //   return {
-    //     ...state,
-    //     entries: state.entries.filter(entry => entry.id !== action.id)
-    //   };
-    // }
+    case ENTRIES.EDIT: {
+      // Edit user in state
+      const payload = action.payload as EntryObject;
+      const updatedItems = state.entries.map(entry => {
+        if (entry.id === payload.id) {
+          return { ...entry, ...action.payload };
+        }
+        return entry;
+      });
+      return { ...state, entries: updatedItems };
+    }
+    case ENTRIES.REMOVE: {
+      // Remove user from state
+      const payload = action.payload as EntryObject;
+
+      return {
+        ...state,
+        entries: state.entries.filter(entry => entry.id !== payload.id)
+      };
+    }
     // case ENTRIES.GETBYID: {
     //   // Get user by id
     //   const entry = state.entries.find(entry => entry.id == action.id);

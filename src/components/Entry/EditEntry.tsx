@@ -1,31 +1,41 @@
 import React, { useState } from "react";
+import { RouteComponentProps } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { routes } from "../../_helpers";
 
-import { addEntry } from "../../store/entries/actions";
-import { RouteComponentProps } from "react-router-dom";
+import { editEntry } from "../../store/entries/actions";
+import { removeEntry } from "../../store/entries/actions";
+import { IEntryProps } from "../../_helpers";
 
-export const AddEntry: React.FunctionComponent<RouteComponentProps> = props => {
+export const EditEntry: React.FunctionComponent<RouteComponentProps<
+  void,
+  {},
+  IEntryProps
+>> = props => {
   const dispatch = useDispatch();
 
-  // TODO: get id from api and store it in the state. Needs to happen in the Entries actions
-  const [id, setId] = useState(Math.floor(Math.random() * 10000));
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-  const [date, setDate] = useState("22-Jan-2020");
-  const [userId, setUserId] = useState(13);
+  const [entry, setEntry] = useState({
+    id: props.location.state.id,
+    title: props.location.state.title,
+    body: props.location.state.body,
+    date: props.location.state.date,
+    userId: props.location.state.userId
+  });
 
-  const addHandler = (event: { preventDefault: () => void }) => {
+  const editHandler = (event: { preventDefault: () => void }) => {
     event.preventDefault();
 
-    const entryObject = { id, title, body, date, userId };
-    dispatch(addEntry(entryObject));
+    dispatch(editEntry(entry));
+    props.history.push(routes.Home);
+  };
 
+  const deleteEntry = () => {
+    dispatch(removeEntry(entry));
     props.history.push(routes.Home);
   };
 
   return (
-    <form className="entry-editor" onSubmit={addHandler}>
+    <form className="entry-editor" onSubmit={editHandler}>
       <div className="concepts">
         <div className="concept-header">Concept</div>
         {/* First concept */}
@@ -59,15 +69,19 @@ export const AddEntry: React.FunctionComponent<RouteComponentProps> = props => {
           <input
             type="text"
             placeholder="Titel..."
-            value={title}
-            onChange={({ target }) => setTitle(target.value)}
+            value={entry.title}
+            onChange={({ target }) =>
+              setEntry({ ...entry, title: target.value })
+            }
           />
         </div>
         <div className="body-input">
           <textarea
             placeholder="Schrijf hier je reflectie..."
-            value={body}
-            onChange={({ target }) => setBody(target.value)}
+            value={entry.body}
+            onChange={({ target }) =>
+              setEntry({ ...entry, body: target.value })
+            }
           />
         </div>
       </div>
@@ -91,6 +105,14 @@ export const AddEntry: React.FunctionComponent<RouteComponentProps> = props => {
           <div className="options-wrapper">
             <div className="option">Iedereen</div>
             <input className="option" type="submit" value="Plaatsen" />
+            <button
+              className="option"
+              type="reset"
+              value="Reset"
+              onClick={() => deleteEntry()}
+            >
+              Verwijderen
+            </button>
           </div>
         </div>
       </div>
@@ -98,4 +120,4 @@ export const AddEntry: React.FunctionComponent<RouteComponentProps> = props => {
   );
 };
 
-export default AddEntry;
+export default EditEntry;

@@ -8,6 +8,7 @@ export interface EntryObject {
 
 export interface EntryState {
   entries: EntryObject[];
+  // entries: Array<EntryObject>  // Kan ook
 }
 
 export const ENTRIES = {
@@ -36,12 +37,12 @@ interface AddAction {
 
 interface EditAction {
   type: typeof ENTRIES.EDIT;
-  payload: EntryState;
+  payload: EntryObject;
 }
 
 interface RemoveAction {
   type: typeof ENTRIES.REMOVE;
-  payload: EntryState;
+  payload: EntryObject;
 }
 
 interface GetByIdAction {

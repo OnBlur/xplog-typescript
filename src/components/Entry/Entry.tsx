@@ -1,22 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { IEntryProps } from "../../_helpers";
 
-interface IProps {
-  id: number;
-  title: string;
-  body: string;
-  date: string;
-  userId: number;
-}
-
-export const Entry: React.FunctionComponent<IProps> = props => {
+export const Entry: React.FunctionComponent<IEntryProps> = props => {
   return (
     <Link
       className="entry-wrapper"
       to={{
         pathname: `/entry/${props.id}`,
         state: {
-          entryId: props.id,
+          id: props.id,
           title: props.title,
           body: props.body,
           date: props.date,

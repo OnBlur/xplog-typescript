@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { RouteComponentProps } from "react-router-dom";
 import { useTypedSelector } from "../store/_reducers";
 
 import Entry from "./Entry/Entry";
-import { RouteComponentProps } from "react-router-dom";
 
 interface IProps {
   // name: string;
@@ -14,7 +15,8 @@ interface IProps {
 
 // export const Dashboard: React.FunctionComponent<RouteComponentProps<IRouteParams>> = props => {
 export const Dashboard: React.FunctionComponent<RouteComponentProps> = props => {
-  const entries = useTypedSelector(state => state.entries.entries);
+  const entries = useTypedSelector(state => state.entryReducer.entries);
+  const dispatch = useDispatch();
   // props.match.params.id
 
   const toEntry = () => {

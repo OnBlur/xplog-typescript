@@ -5,8 +5,8 @@ import { systemReducer } from "./state.reducer";
 import { entryReducer } from "./entries.reducer";
 
 const rootReducer = combineReducers({
-  entries: entryReducer,
-  system: systemReducer
+  entryReducer,
+  systemReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
